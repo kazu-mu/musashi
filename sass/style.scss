@@ -1,0 +1,1131 @@
+@charset "UTF-8";
+@use "mixin" as *;
+
+body {
+    font-family: "Inter","Noto Sans JP", sans-serif;
+    color: #fcfcfc;
+    background-color: #030303;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fcfcfc;
+}
+
+img {
+    width: 100%;
+}
+
+.wrapper {
+    max-width: 1250px;
+    padding: 0 2%;
+    margin: 0 auto;
+    
+    @include mq($md) {
+        max-width: 100%;
+        padding: 0 4%;
+    }
+}
+
+.page_title {
+    font-size: 70px;
+    font-weight: 400;
+    @include mq($lg) {
+        font-size: 50px;
+    }
+    @include mq($md) {
+        font-size: 40px;
+    }
+}
+
+.section_title {
+    font-size: 30px;
+    font-weight: 400;
+    span {
+        font-size: 20px;
+        display: inline-block;
+        margin-top: 35px;
+    }
+}
+
+.page_animation {
+    display: none;
+}
+
+//fade out
+.appear {
+    .page_animation {
+        display: block;
+        animation-duration:.5s;
+        animation-timing-function:ease-in-out;
+        animation-fill-mode:forwards;
+        content: "";
+        position:fixed;
+        z-index: 999;
+        background-color: #fff;/*伸びる背景色の設定*/
+    }
+    .page_above {
+        animation-name:OutAnime;
+        width: 100%;
+        height: 50vh;
+        top: 0;
+        left:0;
+        transform: scaleY(1);
+    }
+    .page_below {
+        animation-name:OutAnime2;
+        width: 100%;
+        height: 50vh;
+        bottom: 0;
+        left:0;
+        transform: scaleY(1);
+    }
+    .page_left  {
+        animation-name: OutAnime3;
+        animation-delay: .5s;
+        width: 50%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        transform: scaleX(0);
+    }
+    .page_right  {
+        animation-name: OutAnime4;
+        animation-delay: .5s;
+        width: 50%;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        transform: scaleX(0);
+    }
+}
+
+
+@keyframes OutAnime{
+    0% {
+        transform-origin:top;
+        transform:scaleY(0);
+    }
+
+    100% {
+        transform-origin:top;
+        transform:scaleY(.997);
+    }
+}
+
+@keyframes OutAnime2{
+    0% {
+        transform-origin:bottom;
+        transform:scaleY(0);
+    }
+    100% {
+        transform-origin:bottom;
+        transform:scaleY(.997);
+    }
+}
+
+ @keyframes OutAnime3{
+    0% {
+        transform-origin:left;
+        transform:scaleX(0);
+    }
+    100% {
+    transform-origin:left;
+        transform:scaleX(.7);
+    }
+}
+@keyframes OutAnime4{
+    0% {
+        transform-origin:right;
+        transform:scaleX(0);
+    }
+    100% {
+        transform-origin:right;
+        transform:scaleX(.7);
+    }
+}
+
+//fade in
+.page_start {
+    .page_animation {
+        display: block;
+        animation-duration:.5s;
+        animation-timing-function:ease-in-out;
+        animation-fill-mode:forwards;
+        content: "";
+        position:fixed;
+        z-index: 999;
+        background-color: #fff;/*伸びる背景色の設定*/
+    }
+    .page_above {
+        animation-name:InAnime;
+        animation-delay: .5s;
+        width: 100%;
+        height: 49.8vh;
+        top: 0;
+        left:0;
+        transform: scaleY(1);
+    }
+    .page_below {
+        animation-name:InAnime2;
+        animation-delay: .5s;
+        width: 100%;
+        height: 49.8vh;
+        bottom: 0;
+        left:0;
+        transform: scaleY(1);
+    }
+    .page_left  {
+        animation-name: InAnime3;
+        width: 50%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        transform: scaleX(1);
+    }
+    .page_right  {
+        animation-name: InAnime4;
+        width: 50%;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        transform: scaleX(1);
+    }
+}
+
+
+
+@keyframes InAnime{
+    0% {
+        transform-origin:top;
+        transform:scaleY(1);
+    }
+
+    100% {
+        transform-origin:top;
+        transform:scaleY(0);
+    }
+}
+
+@keyframes InAnime2{
+    0% {
+        transform-origin:bottom;
+        transform:scaleY(.997);
+    }
+    100% {
+        transform-origin:bottom;
+        transform:scaleY(0);
+    }
+}
+
+@keyframes InAnime3{
+    0% {
+        transform-origin:left;
+        transform:scaleX(.7);
+    }
+    100% {
+        transform-origin:left;
+        transform:scaleX(0);
+    }
+}
+@keyframes InAnime4{
+    0% {
+        transform-origin:right;
+        transform:scaleX(.7);
+    }
+    100% {
+        transform-origin:right;
+        transform:scaleX(0);
+    }
+}
+
+//header
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    padding-left: 2%;
+    padding-right: 2%;
+    opacity: 0;
+    animation: fadeIn 1s ease 1s forwards;
+    position: relative;
+    z-index: 50;
+    @include mq($md) {
+        height: 80px;
+        align-items: center;
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+    &_logo {
+        margin-top: 40px;
+    }
+    &_list {
+        display: flex;
+        margin-top: 60px;
+        nav {
+            @include mq($lg) {
+                display: none;
+            }
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                li {
+                    margin-left: 70px;
+                    position: relative;
+                }
+                li::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #fff;
+                    transition: all .3s;
+                    transform: scale(0, 1);
+                    transform-origin: left top;
+                }
+                li:hover::after {
+                    transform: scale(1, 1);
+                }
+
+            }
+        }
+        .sns_list {
+            display: flex;
+            margin-right: 40px;
+            margin-left: 60px;
+            @include mq($md) {
+                display: none;
+            }
+            img {
+                border-radius: 50%;
+                margin-left: 10px;
+                width: 21px;
+            }
+        }
+
+        //ハンバーガーメニュー
+        .hamburger {
+            font-size: 10px;
+            width: 50px;
+            height: 50px;
+            margin-top: -20px;
+            text-align: right;
+            cursor: pointer;
+            position: relative;
+            z-index: 30;
+            transition: .3s;
+    
+            span {
+                height: 3px;
+                background-color: #fff;
+                position: absolute;
+                right: 0;
+                transition: .5s;
+            }
+    
+            span:nth-child(2) {
+                width: 100%;
+                top: 40%;
+            }
+            span:nth-child(3) {
+                width: 80%;
+                top: 70%;
+            }
+        }
+    
+        .hamburger:hover {
+            opacity: .7;
+        }
+    }
+    .menu {
+        opacity: 0;
+        visibility: hidden;
+        background-color: #525151;
+        width: 30%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding-top: 150px;
+        text-align: center;
+        z-index: 20;
+        transition: all .5s ease;
+        @include mq($md) {
+            width: 100%;
+        }
+        &_list {
+            li {
+                margin-bottom: 40px;
+            }
+            a {
+                position: relative;
+            }
+            a::after {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 2px;
+                background-color: #fff;
+                transition: all .3s;
+                transform: scale(0, 1);
+                transform-origin: left top;
+            }
+            a:hover::after {
+                transform: scale(1, 1);
+            }
+        }
+    }
+    .menu_back {
+        opacity: 0;
+        visibility: hidden;
+        width: 100%;
+        height: 100vh;
+        background-color: #000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.open {
+    .hamburger {
+        position: fixed;
+        right: 2%;
+        @include mq($md) {
+            right: 4%;
+            top: 55px;       
+        }
+        span:nth-child(2) {
+            width: 80%;
+            top: 70%;
+            transform: rotate(45deg);
+        }
+        span:nth-child(3) {
+            top: 70%;
+            transform: rotate(-45deg);
+        }
+    }
+    .menu {
+        opacity: 1;
+        visibility: visible;
+    }
+    .menu_back {
+        opacity: .7;
+        visibility: visible;
+    }
+}
+
+//main
+.main {
+    @include mq($md) {
+        background-color: #000;
+    }
+    .mainvisual {
+        background: url('../../images/top_mv_pc.png');
+        background-size: cover;
+        width: 100%;
+        min-height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -10;
+        @include mq($md) {
+            position: static;
+            display: block;
+            width: 100%;
+            height: 100vh;
+            margin-top: -80px;
+            background: url('../../images/top_mv_sp.png');
+            background-size: cover;
+        }
+    }
+    //scrollのitem
+    .scroll_top {
+        display: none;
+        @include mq($md) {
+            display: block;
+            margin-top: -80px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .scroll_line {
+            width: 1px;
+            height: 180px;
+            background-color: #fff;
+            margin: 9px auto 0;
+            position: relative;
+            .scroll_item {
+                display: inline-block;
+                position: absolute;
+                animation-name: scroll;
+                animation-timeline: scroll();
+            }
+            .square {
+                left: -9px;
+                width: 18px;
+                height: 29px;
+                background-color: #d9d9d9;
+            }
+            .circle {
+                margin-top: 6px;
+                left: -4px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #fff;
+            }
+        }
+    }
+
+    .scroll {
+        display: block;
+        margin-top: -80px;
+        text-align: center;
+        font-size: 20px;
+        p {
+            position: relative;
+        }
+        .scroll_line {
+            width: 1px;
+            height: 180px;
+            background-color: #fff;
+            margin: 9px auto 0;
+            position: relative;
+            .scroll_item {
+                display: inline-block;
+                position: absolute;
+                animation-name: scroll;
+                animation-timeline: scroll();
+            }
+            .square {
+                left: -9px;
+                width: 18px;
+                height: 29px;
+                background-color: #d9d9d9;
+            }
+            .circle {
+                margin-top: 6px;
+                left: -4px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #fff;
+            }
+        }
+    }
+    
+    @keyframes scroll {
+        from {
+            top: 0%;
+        }
+        to {
+            top: 80%;
+        }
+    }
+    // top / news
+    .news {
+        margin-top: 26vh;
+        margin-left: 70%;
+        animation: fadeUpAnime 1s ease 1.2s forwards;
+        opacity: 0;
+        @include mq($md) {
+            margin: 10px auto;
+            width: 100%;
+            padding-left: calc(20px + 4%);
+            padding-right: 4%;
+            animation: none;
+        }
+        .section_title {
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            margin-left: -20px;
+        }
+        ul {
+            border-left: 1px solid #707070;
+            font-size: 13px;
+            padding: 25px 20px;
+            li {
+                margin-bottom: 50px;
+                position: relative;
+                opacity: 0;
+                time {
+                    margin-bottom: 10px;
+                }
+            }
+            li::before {
+                content: "";
+                position: absolute;
+                top: 5px;
+                left: -26px;
+                width: 12px;
+                height: 12px;
+                background-color: #fff;
+                border: 1px solid #707070;
+                box-sizing: border-box;
+                border-radius: 50%;
+            }
+            li:nth-of-type(1) {
+                animation: fadeUpAnime 1s ease 1.5s forwards;
+                @include mq($md) {
+                    animation: none;
+                }
+            }
+            li:nth-of-type(2) {
+                animation: fadeUpAnime 1s ease 2s forwards;
+                @include mq($md) {
+                    animation: none;
+                }
+            }
+            li:nth-of-type(3) {
+                animation: fadeUpAnime 1s ease 2.5s forwards;
+                @include mq($md) {
+                    animation: none;
+                }
+            }
+            .fadeUp:nth-of-type(1) {
+                animation: fadeUpAnime 1s ease .5s forwards;
+            }
+            .fadeUp:nth-of-type(2) {
+                animation: fadeUpAnime 1s ease .5s forwards;
+            }
+            .fadeUp:nth-of-type(3) {
+                animation: fadeUpAnime 1s ease .5s forwards;
+            }
+        }
+    }
+
+    .fadeUp {
+        animation-name:fadeUpAnime;
+        animation-duration:0.5s;
+        animation-fill-mode:forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeUpAnime{
+        from {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+    }
+
+//supporters
+    .supporters_mv {
+        max-width: 1200px;
+        margin: 80px 19%;
+        text-align: center;
+        .mv_pc {
+            @include mq($md) {
+                display: none;
+            }
+        }
+        .mv_sp {
+            display: none;
+            @include mq($md) {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        .page_title {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .supporters_contents {
+        text-align: center;
+        .section_title {
+            margin-top: 40px;
+            @include mq($md) {
+                display: none;
+            }
+        }
+        .supporters_list {
+            margin-top: 250px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            @include mq($md) {
+                margin-top: 52px;
+                flex-direction: column;
+            }
+            li:nth-of-type(n+1):nth-of-type(-n+2) {
+                max-width: 48%;
+                margin-bottom: 35px;
+                @include mq($md) {
+                    max-width: 400px;
+                    margin: 0 auto 28px;
+                }
+            }
+            li:nth-of-type(n+3):nth-of-type(-n+8) {
+                max-width: 31%;
+                margin-bottom: 22px;
+                @include mq($md) {
+                    max-width: 400px;
+                    margin: 0 auto 28px;
+                }
+            }
+            li:nth-of-type(n+9):nth-last-of-type(n) {
+                max-width: 31%;
+                margin-bottom: 22px;
+                @include mq($md) {
+                    max-width: 400px;
+                    margin: 0 auto 28px;
+                }
+            }
+            img {
+                object-fit: contain;
+                width: 100%;
+            }
+
+        }
+    }
+
+    //profile, activities, snsのmv
+    .profile_mv, .activities_mv, .sns_mv {
+        width: 100%;
+        margin: -100px auto 0;
+        position: relative;
+        .mv_pc {
+            @include mq($md) {
+                display: none;
+            }
+        }
+        .mv_sp {
+            display: none;
+            @include mq($md) {
+                display: block;
+                margin: 120px auto 30px;
+            }
+        }
+        .page_title {
+            position: absolute;
+            top: 45%;
+            left: 62%;
+            @include mq($md) {
+                position: static;
+                text-align: center;
+            }
+        }
+    }
+    .activities_mv, .sns_mv {
+        img {
+            opacity: .5;
+        }
+    }
+    .scroll {
+        @include mq($md) {
+            margin-top: 34px;
+        }
+    }
+    // profile
+    .profile_contents {
+        display: flex;
+        max-width: 1500px;
+        margin-top: 90px;
+        @include mq($md) {
+            flex-direction: column;
+            margin-bottom: 90px;
+        }
+        .profile_img {
+            width: 50%;
+            margin-right: 4%;
+            @include mq($md) {
+                width: 100%;
+                margin-bottom: 52px;
+            }
+        }
+        .profile_info {
+            width: 48%;
+            @include mq($md) {
+                width: 100%;
+            }
+            p {
+                font-size: 14px;
+                margin-top: 80px;
+                line-height: 2em;
+            }
+        }
+    }
+    // activities
+    .activities_container {
+        @include mq($md) {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .activities_title {
+        margin: 130px auto 155px;
+        text-align: center;
+        @include mq($md) {
+            order: 2;
+            margin-left: 4%;
+            margin-right: auto;
+            margin-bottom: 84px;
+            text-align: left;
+        }
+    }
+    .activities_contents {
+        display: flex;
+        flex-direction: row-reverse;
+        max-width: 1500px;
+        @include mq($md) {
+            display: contents;
+        }
+        .activities_img {
+            width: 50%;
+            padding-right: 2%;
+            @include mq($md) {
+                width: 100%;
+                margin-top: 52px;
+                margin-bottom: 52px;
+                order: 1;
+            }
+        }
+        .activities_info {
+            width: 50%;
+            padding-left: 1%;
+            @include mq($md) {
+                width: 100%;
+                order: 3;
+                margin-bottom: 90px;
+            }
+            p {
+                font-size: 14px;
+                line-height: 2em;
+            }
+        }
+    }
+
+    // sns
+    .sns_title {
+        text-align: center;
+        margin: 134px auto 84px;
+    }
+    .section_logo {
+        width: 62px;
+        height: 62px;
+        text-align: center;
+        margin: 0 auto 54px;
+        img {
+            border-radius: 50%;
+        }
+    }
+    .sns_contents {
+        display: flex;
+        justify-content: space-between;
+        @include mq($md) {
+            flex-wrap: wrap;
+        }
+        li {
+            margin-left: 1%;
+            margin-right: 1%;
+            @include mq($md) {
+                width: 48%;
+            }
+        }
+    }
+    .ig_list {
+        li:nth-of-type(n+5):nth-of-type(-n+7) {
+            @include mq($md) {
+                display: none;
+            }
+        }
+    }
+    .youtube_list {
+        li:nth-of-type(n+3):nth-of-type(-n+7) {
+            @include mq($md) {
+                display: none;
+            }
+        }
+    }
+    .instagram, .youtube {
+        margin-bottom: 105px;
+    }
+    .youtube {
+        @include mq($md) {
+            margin-bottom: 400px;   
+        }
+    }
+    .line {
+        @include mq($md) {
+            display: none;
+        }
+        .sns_item {
+            width: 38%;
+            margin: 0 auto;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    }
+
+    // news detail
+    .slider_contents {
+        max-width: 950px;
+        margin: 100px auto 150px;
+    }
+
+
+    .main_slider {
+        width: 100%;
+        max-width: 500px;
+        margin: 15px auto 70px;
+        @include mq($md) {
+            width: 80%;
+            margin: 5% auto;
+        }
+        li {
+        margin-right: 5px;
+        margin-left: 5px;
+        img {
+            height: auto;
+            width: 100%;
+        }
+        }
+        // main矢印
+        .slide-arrow {
+            display: block;
+            width: 42px;
+            height: 125px;
+            transition: all .3s ease;
+            cursor: pointer;
+            position:relative;
+        }
+        .slide-arrow:hover {
+            opacity: .5;
+        }
+        .prev-arrow {
+            position: absolute;
+            top: 50%;
+            left: -20%;
+            transform: translateY(-50%);
+            @include mq($md) {
+                left: -5%;
+            }
+        }
+        .next-arrow {
+            position: absolute;
+            top: 50%;
+            right: -20%;
+            transform: translateY(-50%);
+            @include mq($md) {
+                right: -5%;   
+            }
+        }
+        .prev-arrow::after,
+        .prev-arrow::before {
+            position:absolute;
+            content: "";
+            width:75px;
+            border-bottom: 1px solid #FAF4F4;
+            top:50%;
+            left:0;
+            margin:auto;
+            @include mq($md) {
+                width: 30px;
+            }
+        }
+        .prev-arrow::before {
+            transform:rotate(-60deg);    
+            transform-origin:left bottom;
+        }
+        .prev-arrow::after {
+            transform:rotate(60deg);
+            transform-origin:left top;
+        }
+
+        .next-arrow::after,
+        .next-arrow::before {
+            position:absolute;
+            content: "";
+            width:75px;
+            border-bottom: 1px solid #FAF4F4;
+            top:50%;
+            right:0;
+            margin:auto;
+            @include mq($md) {
+                width: 30px;
+            }
+        }
+        .next-arrow::before {
+            transform:rotate(-60deg);    
+            transform-origin:right top;
+        }
+        .next-arrow::after {
+            transform:rotate(60deg);
+            transform-origin:right bottom;
+        }
+    }
+
+    // thumb 矢印
+    .thumb_slider {
+        width: 80%;
+        max-width: 1200px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 68px;
+        justify-content: space-between;
+        @include mq($md) {
+            margin: 5% auto;
+        }
+        li {
+            margin-right: 5px;
+            margin-left: 5px;
+            img {
+                height: auto;
+                width: 100%;
+                aspect-ratio: 1 / 1.3;
+                object-fit: cover;
+            }
+        }
+    }
+      
+      
+    .thumb_slider .slick-track {
+        transform: unset !important;
+    }
+    
+    
+    .thumb_slider .slick-current img {
+        opacity: 1;
+    }
+    
+
+    // thumb矢印
+    .thumb-arrow {
+        display: block;
+        width: 21px;
+        height: 63px;
+        transition: all .3s ease;
+        cursor: pointer;
+        position:relative;
+    }
+    .thumb-arrow:hover {
+        opacity: .5;
+    }
+    .thumb-prev-arrow {
+        position: absolute;
+        top: 50%;
+        left: -5%;
+        transform: translateY(-50%);
+    }
+    .thumb-next-arrow {
+        position: absolute;
+        top: 50%;
+        right: -5%;
+        transform: translateY(-50%);
+    }
+    .thumb-prev-arrow::after,
+    .thumb-prev-arrow::before {
+        position:absolute;
+        content: "";
+        width:37px;
+        border-bottom: 1px solid #FAF4F4;
+        top:50%;
+        left:0;
+        margin:auto;
+        @include mq($md) {
+            width: 16px;       
+        }
+    }
+    .thumb-prev-arrow::before {
+        transform:rotate(-60deg);    
+        transform-origin:left bottom;
+    }
+    .thumb-prev-arrow::after {
+        transform:rotate(60deg);
+        transform-origin:left top;
+    }
+
+    .thumb-next-arrow::after,
+    .thumb-next-arrow::before {
+        position:absolute;
+        content: "";
+        width:37px;
+        border-bottom: 1px solid #FAF4F4;
+        top:50%;
+        right:0;
+        margin:auto;
+        @include mq($md) {
+            width: 16px;       
+        }
+    }
+    .thumb-next-arrow::before {
+        transform:rotate(-60deg);    
+        transform-origin:right top;
+    }
+    .thumb-next-arrow::after {
+        transform:rotate(60deg);
+        transform-origin:right bottom;
+    }
+}
+
+//footer
+.footer {
+    margin-top: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+    height: 130px;
+    padding-left: 4%;
+    padding-right: 4%;
+    align-items: center;
+    @include mq($md) {
+        background-color: #000;
+        margin-top: -10px;
+        flex-direction: column;
+        height: auto;
+    }
+    .sponsor {
+        display: flex;
+        @include mq($md) {
+            flex-wrap: wrap;
+            margin-top: 20px;
+            margin-bottom: 22px;
+        }
+        li {
+            margin-left: 31px;
+            @include mq($md) {
+                width: 28%;
+                margin: auto;
+            }
+            a:hover {
+                opacity: .7;
+            }
+        }
+    }
+    .address {
+        font-size: 15px;
+        @include mq($md) {
+            margin-bottom: 40px;
+        }
+    }
+}

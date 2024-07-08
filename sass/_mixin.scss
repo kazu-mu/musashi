@@ -1,0 +1,8 @@
+$md: 768px;
+$lg: 1124px;
+
+@mixin mq($bp) {
+    @media (max-width: ($bp)) {
+        @content;
+    }
+}
